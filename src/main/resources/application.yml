@@ -1,13 +1,16 @@
 server:
   port: 9000
-  
+
+build:
+  version: "4.0"
+   
 spring:
   datasource:
     url: jdbc:h2:mem:dcbapp
     driverClassName: org.h2.Driver
     username: sa
     password: password
-    
+      
   h2:
     console:
       enabled: true
@@ -19,6 +22,24 @@ spring:
 #this property is required to create table automatically using entities
     defer-datasource-initialization: true
 
+  profiles:
+    active: "prod"
+
+  application:
+    name: "cards"    
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+    cloud:
+     config:
+      enabled: true
+      uri: "//localhost:8071" 
+      
+management:
+ endpoints:
+  web:
+   exposure:
+    include: "*"
+    
 logging:
   level:
     org:

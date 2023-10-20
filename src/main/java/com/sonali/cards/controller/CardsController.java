@@ -1,5 +1,6 @@
 package com.sonali.cards.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +32,19 @@ public class CardsController {
 
 	private ICardsService iCardsService;
 	
-	@GetMapping("/get")
-	public String test() {
-		return "hello cards";
-	}
+	@GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo(@Value("${build.version}") String buildVersion) {
+        return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(buildVersion);
+    }
+	
+	@GetMapping("/message")
+    public ResponseEntity<String> getMessage(@Value("${cards.message}") String buildVersion) {
+        return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(buildVersion);
+    }
 	
 	@PostMapping("/create")
     public ResponseEntity<ResponseDto> createCard(@Valid @RequestParam
