@@ -98,7 +98,7 @@
 				<version>3.3.1</version>
 				<configuration>
 					<to>
-						<image>sonalithorat/${project.artifactId}:s2</image>
+						<image>sonalithorat/${project.artifactId}:s6</image>
 					</to>
 				</configuration>
 			</plugin>
