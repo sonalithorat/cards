@@ -23,7 +23,7 @@ import lombok.ToString;
 public class BaseEntity {
 	@CreatedDate
 	@Column(updatable = false)
-	private LocalDateTime createdDt;
+	private LocalDateTime createdAt;
 	
 	@CreatedBy
 	@Column(updatable = false)
@@ -31,7 +31,7 @@ public class BaseEntity {
 	
 	@LastModifiedDate
 	@Column(insertable = false)
-	private LocalDateTime updatedDt;
+	private LocalDateTime updatedAt;
 	
 	@LastModifiedBy
 	@Column(insertable = false)

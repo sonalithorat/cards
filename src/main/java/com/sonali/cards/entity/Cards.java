@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cards {
+public class Cards extends BaseEntity{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO,generator="native")
