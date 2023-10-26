@@ -1,5 +1,7 @@
 package com.sonali.cards.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.sonali.cards.constants.CardsConstants;
 import com.sonali.cards.dto.CardsDto;
@@ -29,7 +33,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Validated
 public class CardsController {
-
+	private static final Logger logger = LoggerFactory.getLogger(CardsController.class);
 	private ICardsService iCardsService;
 	
 	@GetMapping("/build-info")
@@ -59,8 +63,9 @@ public class CardsController {
 	@GetMapping("/fetch")
     public ResponseEntity<CardsDto> fetchCardDetails(@RequestParam
                                                                @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
-                                                               String mobileNumber) {
-        CardsDto cardsDto = iCardsService.fetchCard(mobileNumber);
+                                                               String mobileNumber, @RequestHeader("eazybank-correlation-id") String correlationId) {
+		logger.debug("eazyBank-correlation-id found: {} ", correlationId);
+		CardsDto cardsDto = iCardsService.fetchCard(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(cardsDto);
     }
 	

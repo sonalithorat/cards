@@ -51,9 +51,17 @@ management:
    exposure:
     include: "*"
   #eureka properties starts from here  
+ health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
  endpoint:
-  shutdown:
-   enabled: true
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
  
  info:
   env:
